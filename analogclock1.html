@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom right, #2c3e50, #bdc3c7);
+        }
+
+        #clockcount {
+            position: relative;
+            margin: auto;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, #fff, #ddd);
+            border: 10px solid #333;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        #hour, #minutes, #seconds {
+            position: absolute;
+            background: black;
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+
+        #hour {
+            width: 3%;
+            height: 25%;
+            top: 25%;
+            left: 48.5%;
+            background: #333;
+            opacity: 0.9;
+        }
+
+        #minutes {
+            width: 2%;
+            height: 35%;
+            top: 15%;
+            left: 49%;
+            background: #555;
+            opacity: 0.9;
+        }
+
+        #seconds {
+            width: 1%;
+            height: 40%;
+            top: 11%;
+            left: 49.5%;
+            background: red;
+            opacity: 1;
+        }
+
+        #center-point {
+            position: absolute;
+            width: 3%;
+            height: 3%;
+            background: #000;
+            border: 3px solid red;
+            border-radius: 50%;
+            top: 48%;
+            left: 49%;
+            z-index: 10;
+            box-shadow: 0 0 10px red;
+        }
+    </style>
+</head>
+<body>
+    <div id="clockcount">
+        <div id="hour"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+        <div id="center-point"></div>
+    </div>
+    <script>
+        setInterval(clock, 1000);
+        function clock() {
+            const d = new Date();
+            const hr = d.getHours();
+            const min = d.getMinutes();
+            const sec = d.getSeconds();
+
+            const hr_rotation = 30 * hr + min / 2; // 30 degrees for each hour, and 0.5 degrees per minute
+            const min_rotation = 6 * min;         // 6 degrees for each minute
+            const sec_rotation = 6 * sec;         // 6 degrees for each second
+
+            document.getElementById('hour').style.transform = `rotate(${hr_rotation}deg)`;
+            document.getElementById('minutes').style.transform = `rotate(${min_rotation}deg)`;
+            document.getElementById('seconds').style.transform = `rotate(${sec_rotation}deg)`;
+        }
+    </script>
+</body>
+</html>
